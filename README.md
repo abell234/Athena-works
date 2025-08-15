@@ -2,55 +2,40 @@
 [![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
 
 
-❤️ This Heart Disease Risk Checker helps users estimate their potential risk for heart disease based on lifestyle, health history, and other factors.
+❤️ This Heart Disease Risk Checker is a simple, interactive website that helps users estimate their heart disease risk based on everyday life factors and health history. With a quick questionnaire, users instantly see their risk level (Low, Medium, or High), a visual progress bar, and personalized tips for heart health.
 
-This project is built entirely with HTML, CSS, and JavaScript. It runs fully in the browser and calculates your risk score instantly.
+Why did I make this?
+I built this as my capstone project for Kode With Klossy, but I’ve completely restructured both the code structure and the user experience.
+Heart disease is the world’s leading cause of death, but many people don’t know their own risk. I wanted to create a tool that makes it easy and accessible for anyone to check and reflect on their heart health in just a couple of minutes.
 
+How did I make it?
+Frontend only: Written in HTML, CSS, and JavaScript no backend was required.
+Questionnaire form: The HTML presents all the questions (age, sex, family history, lifestyle habits, medical history).
+Scoring logic: JavaScript receives the user’s responses and uses simple functions to assign each answer a risk score.
+Calculations: risk score is the sum of points from each answer. The higher risk answers (like not exercising or smoking) adds more points to your score.
+The total score assigns a risk category: Low (≤10), Medium (11–20), High (21+).
+Results display after submitting the form, scores are shown along with a risk badge (in color), a progress bar, and custom tips based on answers.
 
+Personal style: The styling uses warm reds and pinks, a beating heart animation, and a layout designed for clarity.
 
-Users answer a quick questionnaire about:
+What I struggled with & what I learned
+I struggled with understanding how to combine all questionnaire answers into a fair scoring system (balancing “risk points” for different behaviors took some trial and error) based on the CDC and AHA guidelines. Also, making the results section update smoothly without reloading the page, and keeping everything visually clear this took me a while to figure out. My biggest struggle was with debugging to make sure all input was validated, results didn’t show twice, and tips were relevant for everyone.
 
-Age & biological sex
-Family history (blood pressure, cholesterol)
-Lifestyle habits (diet, exercise, smoking, alcohol, stress, sleep)
-Medical conditions (diabetes, kidney disease, high BP/Cholesterol)
+What I learned: I learned how to break big problems down into manageable code pieces. Also clarity of clean UI/UX for health questionares that has to be based on trusted information. I also gained a deeper confidence in JavaScript. By working with forms, dynamic content, and conditional statements. The importance of constructive feedback and my own creative decisions in making the project.
 
-The app then scores each answer based on risk level.
- Then calculates a total score and assigns a low, medium, or high risk.
-Displays results with a color-coded badge, progress bar, and personalized tips.
+Code Overview:
+Form handling: The JavaScript processes each answer on submit, prevents page reload, and updates the result display.
+Scoring functions: Each of the factors (age, exercise, etc.) has its own function for assigning points.
+Result logic: adds the points then sets the progress bar color, and prints the advice with tips based on the users answers.
 
-🛠 How the JS Works
-Form Handling – Captures user input on submit and prevents default page reload.
-Scoring Functions – Each question has a function that returns points:
-Total Score – Adds up all points from answers.
-
-Risk Level Assignment –
-
-0–10 → Low
-
-11–20 → Medium
-
-21+ → High
-
-Display Update – adjusts progress bar %, and creates tip suggestions.
-
-Reset – Lets the user retake the quiz.
-
-
-📚 Health Resources Used
-The risk scoring and suggestions are based on credible health sources:
-
+Health resources used:
 CDC – Heart Disease Information
-
-AHA – Heart Disease & Stroke Statistics 2025
-
+American Heart Association – Heart Disease & Stroke 2025
 Better Health Channel – Diet Factors
-
 CDC – Sleep and Heart Health
+AHA – Heart/Kidney Connection
 
-AHA – Heart-Kidney Connection
+Disclaimer
+This tool is for educational purposes only and not a substitute for medical advice. Please contact a health professional with any concerns.
 
-⚠️ Disclaimer
-This tool is for educational and informational purposes only.
-It is NOT a medical diagnosis.
-Always consult a licensed healthcare provider for medical advice
+Thanks for reading! If you have suggestions, feel free to open an issue or fork the project. ❤️
