@@ -1,0 +1,484 @@
+ <!DOCTYPE html>
+ <html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Heart Disease Risk Checker</title>
+        <style>
+            body{
+                font-family: Arial, sans-serif;
+                color: #590D22;
+                background: #f7f8fc;
+                margin:0;
+                padding:0;
+            }
+                 header{
+                    background: linear-gradient(90deg, #ff4d4d, #ff9966);
+                    padding: 1rem;
+                    text-align: center;
+                    color: white; 
+                    font-weight: 800;
+                    font-size: 1.8rem;
+                    border-bottom: 4px solid #ff3333;
+                 }
+
+            main{
+                max-width: 800px;
+                margin: 2rem auto;
+                padding: 2rem;
+                background: #FFD6DC;
+                border-radius: 1.2rem;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            }
+
+
+
+    h2{
+        color: #590D22;
+        font-weight:600;
+        margin-bottom: 1rem;
+    }
+
+
+    label{
+        display: block;
+        margin-top: 1rem;
+        font-weight: 600;
+    }
+
+    input, select{
+        width: 100%;
+        padding: 0.8em 0.9em;
+        margin-top: 0.2em;
+        border-radius: 11px;
+        border: 2px solid #F46075;
+        background: #FFD6DC;
+        color: #590D22;
+        font-size: 1em;
+        box-sizing: border-box;
+        margin-bottom: 0.3em;
+    }
+
+    input[type="submit"], button{
+        margin-top: 1.4em;
+        border: none;
+        border-radius:30px;
+        padding: 0.9em 2em;
+        background-color: #F46075;
+        color:#FFF;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.18s;
+        box-shadow: 0 3px 9px rgba(244, 96, 117, 0.09);
+    }
+
+    input[type="submit"]:hover, button:hover{
+        background: #D72638;
+    }
+
+    .hidden{
+        display:none;
+    }
+
+    .results{
+        margin-top: 1.4em;
+        text-align:center;
+    }
+    .riskbadge{
+        display: inline-block;
+        color:white;
+        margin: 0.8em 0 0.45em;
+        padding: 0.5em 1.4em;
+        border-radius: 17px;
+        font-weight: bold;
+        font-size: 1.2em;
+        letter-spacing: 1px;
+        box-shadow: 0 3px 9px rgba(89, 13, 34, 0.16);
+
+    }
+
+      .low{
+        background-color: #590D22;
+      }
+      .medium{
+        background: #F46075;
+      }
+      .high{
+        background: #D72638;
+      }
+
+      .fillbar{
+        background:#FFD6DC;
+        border-radius: 10px;
+        width:100%;
+        height: 18px;
+        margin: 1.2em 0 1em;
+        box-shadow: 0 2px 8px #D7263823;
+        overflow: hidden;
+      }
+
+      .riskfill{
+        height: 100%;
+        width: 0%;
+        background:#F46075;
+        border-radius: 10px;
+        transition: width 0.6s, background 0.16s;
+      }
+
+      .advice{
+        text-align: left;
+        padding-left: 1.1em;
+        color: #590D22;
+        margin-top: 6px;
+      }
+
+      .advice li{
+        margin-bottom: 0.6em;
+      }
+
+
+      @media (max-width: 520px){
+        .riskChecker{ padding: 1.3em 0.6em;}
+        h1{
+            font-size: 1.2em;
+        }
+      }
+
+
+      /* footer resources */ 
+      .resources{
+        background-color:#f7f8fc;
+        color: #F46075;
+        padding: 1.5em 2em;
+        text-align: center;
+        border-radius: 0 0 20px 20px;
+        margin-top: 2em;
+        font-size: 0.9em;
+      }
+
+      .resources a{
+        color: #F46075;
+        text-decoration: underline;
+      }
+
+       .resources a:hover{
+        color: #590D22;
+       }
+       .resources ul{
+        padding: 0;
+        margin: 0.5em 0 0 0;
+       }
+       .resources ul li{
+        margin: 0.3em 0;
+       }
+
+       .heart{
+        font-weight:bold;
+       }
+
+       .myheart{
+        color:#D72638;
+        animation: beat 1s infinite;
+        font-size: 5em;
+        text-align: center;
+        margin: 0.5em 0;
+        user-select: none;
+        display: inline-block;
+       }
+       @keyframes beat {
+        0%, 100% {
+            transform: scale(1);
+        } 50% {
+            transform: scale(1.2);
+        }
+       }
+        </style>
+    </head>
+    <body> 
+        <header>Heart Disease Risk Checker</header>
+        <main>
+        <div class="riskChecker">
+            <h2>Check Your Risk</h2>
+
+            <!-- form for the users-->
+             <form id="riskForm">
+                <label for="age">Your Age:</label>
+                <input type="number" id="age" min="1" max="120" required/>
+                 
+                <label for="Sex"> What is your biological Sex:</label>
+             <select id="Sex" name="Sex" required>
+                <option value="f">Female</option>
+                <option value="m">Male</option>
+             </select>
+
+             <label for="familyHistory">What is your family history (choose the most specific to you):</label>
+             <select id="familyHistory"  name="familyHistory" required>
+                <option value="A">High Blood Pressure</option>
+                <option value="B">High Cholesterol</option>
+                <option value="C">Both High Blood pressure & Cholesterol</option>
+                 <option value="D">No family history</option>
+            </select>
+<label for="diabetes"> Do you have diabetes</label>
+<select id="diabetes" name="diabetes" required>
+    <option value="No">No</option>
+    <option value="Yes">Yes</option>
+</select>
+
+            <label for="exercise">How often do you exercise?</label>
+            <select id="exercise" name="exercise" required>
+            <option value="Daily">Daily</option>
+            <option value="Sometimes">Sometimes</option>
+            <option value="Not at all">Not at all</option>
+            </select>
+
+            <label for="bp">Have you ever been diagonsed with high blood pressure?</label>
+             <select id="bp" name="bp" required>
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+             </select>
+
+             <label for="chol">Have you ever been diagonsed with high Cholesterol?</label>
+              <select id="chol" name="chol" required>
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+
+              <label for="diet">Do you eat a balanced meal with plenty of fruits, vegetables, whole grains, and lean proteins?</label>
+              <select id="diet" name="diet" required>
+                <option value="Daily">Daily</option>
+                <option value="Sometimes">Sometimes</option>
+                <option value="Rarely">Rarely</option>
+                <option value="Not at all"></option>
+              </select>
+
+              <label for="fats">How often do you eat fried or fatty foods?</label>
+                   <select id="fats" name="fats" required>
+                    <option value="Daily">Daily</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Rarely">Rarely</option>
+                    <option value="Not at all">Not at all</option>
+                   </select>
+
+
+              <label for="smoking">Do you use tobacco products?</label>
+                <select id="smoking" name="smoking" required>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+
+                <label for="alcohol">How often do you drink alcoholic beverages?</label>
+                  <select id="alcohol" name="alcohol" required>
+                    <option value="Never">Never</option>
+                    <option value="Moderate">Moderate ( 1 drink a day for women, and 2 drinks for men.)</option>
+                    <option value="Heavy">Heavy(more than moderate)</option>
+                </select>
+
+                <label for="stress">How would you describe your stress level?</label>
+                <select id="stress" name="stress" required>
+                    <option value="Low">Low</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="High">High</option>
+                </select>
+ 
+                   
+                <label for="sleep">How would you rate your sleep quality?</label>
+                <select id="sleep" name="sleep" required>
+                    <option value="Good">Good (7-9 hours of sleep per night, feel well-rested)</option>
+                    <option value="Moderate">Moderate (5-7 hours per night or restless)</option>
+                    <option value="Poor">Poor (less than 5 hours or rarely rested)</option>
+                </select>
+
+                <label for="kidney"> Have you ever been told you have chronic kidney disease?</label>
+                <select id="kidney" name="kidney" required>
+                 <option value="No">No</option>
+                 <option value="Yes">Yes</option>
+                </select>
+
+
+                <input type="submit" value="Check My Risk">
+            </form>
+
+            <div id="result" class="results hidden">
+                <div class="myheart">&#10084;</div>
+                <h2>Your Results:</h2>
+                <div id="badge" class="riskbadge">                    
+                </div>
+                <div class="fillbar">
+                    <div id="fillbar" class="riskfill"></div>
+                    </div>
+                    <p id="advice" class="advice"></p>
+                    <button onclick="resetform()">Check Again</button>
+            </div>
+        </main>
+
+        <footer class="resources">
+            <div class="HDR">
+                <p class="heart">
+                 Here are the resources used to make this risk checker:   
+                </p>
+                <ul>
+                    <li><a href="https://www.cdc.gov/heart-disease/about/index.html" target="_blank" 
+                     rel="noopener noreferrer">CDC & Prevention page for Heart Disease </a>
+                    </li>
+                        <li><a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000001303" target="_blank"
+                        rel="noopener noreferrer">AHA Heart Disease and Stroke Stats of 2025</a>
+                     </li>
+                     <li><a href="https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/diet-and-heart-disease-risk" target="_blank"
+                    rel="noopener noreferrer">Better Health Channel diet factors</a></li>
+
+                    <li><a href="https://www.cdc.gov/heart-disease/about/sleep-and-heart-health.html" target="_blank"
+                        rel="noopener noreferrer">Sleep and Heart Health connection</a>
+                    </li>
+                  <li><a href="https://newsroom.heart.org/news/rise-in-kidney-disease-underscores-critical-heart-kidney-connection" target="_blank"
+                    rel="noopener noreferrer">AHA Kidney and Heart connection</a>
+                </li>
+            </ul>
+
+            </div>
+        </footer>
+
+        
+           <script>
+const form = document.getElementById('riskForm');
+const resultDiv = document.getElementById('result');
+const badge = document.getElementById('badge');
+const advice = document.getElementById('advice');
+const fillbar = document.getElementById('fillbar');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Get values (IDs exactly as in HTML)
+  const age = parseInt(document.getElementById('age').value);
+  const sex = document.getElementById('Sex').value;
+  const family = document.getElementById('familyHistory').value;
+  const exercise = document.getElementById('exercise').value;
+  const bp = document.getElementById('bp').value;
+  const chol = document.getElementById('chol').value;
+  const diet = document.getElementById('diet').value;
+  const fats = document.getElementById('fats').value;
+  const smoking = document.getElementById('smoking').value;
+  const alcohol = document.getElementById('alcohol').value;
+  const stress = document.getElementById('stress').value;
+  const sleep = document.getElementById('sleep').value;
+  const kidney = document.getElementById('kidney').value;
+  const diabetes = document.getElementById('diabetes').value;
+
+  // Scoring functions
+  function agePoints(v) {
+    if(v < 35) return 0;
+    else if (v < 50) return 2;
+    else return 4;
+  }
+  function sexPoints(v) {
+    return v === 'm' ? 2 : 1;
+  }
+  function familyPoints(v) {
+    if (v === 'D') return 0;
+    if (v === 'C') return 3;
+    if (v === 'A' || v === 'B') return 2;
+    return 0;
+  }
+  function exercisePoints(v) {
+    return v === 'Daily' ? 0 : v === 'Sometimes' ? 1 : 2;
+  }
+  function dietPoints(v) {
+    return v === 'Daily' ? 0 : v === 'Sometimes' ? 1 : v === 'Rarely' ? 2 : 3;
+  }
+  function yesNoPoints(v) {
+    return v.toLowerCase() === 'yes' ? 3 : 0;
+  }
+  function alcoholPoints(v) {
+    if (v === 'Heavy') return 3;
+    if (v === 'Moderate') return 1;
+    return 0;
+  }
+  function stressPoints(v) {
+    if (v === 'High') return 3;
+    if (v === 'Moderate') return 1;
+    return 0;
+  }
+  function sleepPoints(v) {
+    if (v === 'Good') return 0;
+    if (v === 'Moderate') return 1;
+    return 2;
+  }
+  function fatsPoints(v) {
+    if (v === 'Daily') return 3;
+    if (v === 'Sometimes') return 2;
+    if (v === 'Rarely') return 1;
+    return 0;
+  }
+
+  // Calculate total score
+  const total = 
+    agePoints(age) +
+    sexPoints(sex) +
+    familyPoints(family) +
+    exercisePoints(exercise) +
+    yesNoPoints(bp) +
+    yesNoPoints(chol) +
+    yesNoPoints(diabetes) +
+    yesNoPoints(kidney) +
+    dietPoints(diet) +
+    fatsPoints(fats) +
+    yesNoPoints(smoking) +
+    alcoholPoints(alcohol) +
+    stressPoints(stress) +
+    sleepPoints(sleep);
+
+  
+  let level = '';
+  if (total <= 10) level = 'Low';
+  else if (total <= 20) level = 'Medium';
+  else level = 'High';
+
+  
+  badge.textContent = `${level} Risk`;
+  badge.className = `riskbadge ${level.toLowerCase()}`;
+
+  
+  fillbar.style.width = `${(total / 30) * 100}%`;
+  fillbar.style.background = level === 'Low' ? '#590D22' : level === 'Medium' ? '#F46075' : '#D72638';
+
+  
+  let message =
+    level === 'Low'
+      ? 'Your risk is low. Keep maintaining your healthy lifestyle!'
+      : level === 'Medium'
+        ? 'Your risk is medium. Consider consulting a healthcare professional for advice.'
+        : 'Your risk is high. Please consult with a healthcare professional soon.';
+
+  let tips = [];
+  if (exercise !== 'Daily') tips.push("Try to get at least 30 minutes of physical activity most days.");
+  if (diet !== 'Daily') tips.push("Add more fruits and vegetables to your diet.");
+  if (smoking === 'Yes') tips.push("Consider quitting tobacco to lower your risk.");
+  if (bp === 'Yes') tips.push("Work with your healthcare provider to manage your blood pressure.");
+  if (chol === 'Yes') tips.push("Focus on healthy fats to help lower cholesterol.");
+  if (stress !== 'Low') tips.push("Take steps to manage your stress: try relaxation, regular sleep, or mindfulness techniques.");
+  if (alcohol === 'Heavy') tips.push("Consider reducing your alcohol use. Heavy drinking can damage your heart.");
+  else if (alcohol === 'Moderate') tips.push("Keep your alcohol intake moderate and never binge drink.");
+
+  const tipsHTML = tips.length
+    ? `<div style='margin-top:.9em;text-align:left'><strong>Tips for you:</strong><ul>${tips.map(t => `<li>${t}</li>`).join('')}</ul></div>`
+    : "";
+
+  advice.innerHTML = `<p>${message}</p>` + tipsHTML;
+
+  
+  form.classList.add('hidden');
+  resultDiv.classList.remove('hidden');
+});
+
+
+function resetform() {
+  form.reset();
+  resultDiv.classList.add('hidden');
+  form.classList.remove('hidden');
+  fillbar.style.width = '0%';
+}
+
+        </script>
+    </body>
+ </html>   
