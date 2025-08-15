@@ -1,4 +1,6 @@
 # Athena-works
+[![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
+
 
 ❤️ This Heart Disease Risk Checker helps users estimate their potential risk for heart disease based on lifestyle, health history, and other factors.
 
