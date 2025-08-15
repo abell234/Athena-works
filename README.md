@@ -1,7 +1,6 @@
 # Athena-works
 
-❤️ Heart Disease Risk Checker
-A simple, interactive web tool that helps users estimate their potential risk for heart disease based on lifestyle, health history, and other factors.
+❤️ This Heart Disease Risk Checker helps users estimate their potential risk for heart disease based on lifestyle, health history, and other factors.
 
 This project is built entirely with HTML, CSS, and JavaScript. It runs fully in the browser and calculates your risk score instantly.
 
