@@ -349,7 +349,7 @@ const fillbar = document.getElementById('fillbar');
 form.addEventListener('submit', function(e) {
   e.preventDefault();
 
-  // Get values (IDs exactly as in HTML)
+  // Gets all the values
   const age = parseInt(document.getElementById('age').value);
   const sex = document.getElementById('Sex').value;
   const family = document.getElementById('familyHistory').value;
@@ -365,7 +365,7 @@ form.addEventListener('submit', function(e) {
   const kidney = document.getElementById('kidney').value;
   const diabetes = document.getElementById('diabetes').value;
 
-  // Scoring functions
+  // here is where i start the scoring
   function agePoints(v) {
     if(v < 35) return 0;
     else if (v < 50) return 2;
@@ -411,7 +411,6 @@ form.addEventListener('submit', function(e) {
     return 0;
   }
 
-  // Calculate total score
   const total = 
     agePoints(age) +
     sexPoints(sex) +
@@ -481,4 +480,5 @@ function resetform() {
 
         </script>
     </body>
+
  </html>   
