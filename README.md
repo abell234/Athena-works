@@ -6,6 +6,36 @@ A simple, interactive web tool that helps users estimate their potential risk fo
 This project is built entirely with HTML, CSS, and JavaScript. It runs fully in the browser and calculates your risk score instantly.
 
 
+
+Users answer a quick questionnaire about:
+
+Age & biological sex
+Family history (blood pressure, cholesterol)
+Lifestyle habits (diet, exercise, smoking, alcohol, stress, sleep)
+Medical conditions (diabetes, kidney disease, high BP/Cholesterol)
+
+The app then scores each answer based on risk level.
+ Then calculates a total score and assigns a low, medium, or high risk.
+Displays results with a color-coded badge, progress bar, and personalized tips.
+
+🛠 How the JS Works
+Form Handling – Captures user input on submit and prevents default page reload.
+Scoring Functions – Each question has a function that returns points:
+Total Score – Adds up all points from answers.
+
+Risk Level Assignment –
+
+0–10 → Low
+
+11–20 → Medium
+
+21+ → High
+
+Display Update – adjusts progress bar %, and creates tip suggestions.
+
+Reset – Lets the user retake the quiz.
+
+
 📚 Health Resources Used
 The risk scoring and suggestions are based on credible health sources:
 
